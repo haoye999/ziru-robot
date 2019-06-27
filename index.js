@@ -16,10 +16,12 @@ const loadingImg =
 
 function getInfo(id) {
   const url = `http://www.ziroom.com/z/vr/${id}.html`;
-  let result = '';
 
-  return axios
-    .get(url)
+  return axios(url, {
+    headers: {
+      host: 'www.ziroom.com'
+    }
+  })
     .then(res => cheerio.load(res.data))
     .then($ => $('.pirobox_t6').attr('href'));
 }
@@ -45,7 +47,6 @@ async function sendMail(msg) {
 function main() {
   const timer = setInterval(() => {
     getInfo(id).then(info => {
-      console.log(info, loadingImg);
       if (info !== loadingImg) {
         console.log(configuration.canBuy);
         sendMail('买了买了');
