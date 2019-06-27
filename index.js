@@ -17,7 +17,9 @@ const loadingImg =
 function getInfo(id) {
   const url = `http://www.ziroom.com/z/vr/${id}.html`;
 
-  return axios(url, {
+  return axios({
+    method: 'GET',
+    url,
     headers: {
       host: 'www.ziroom.com'
     }
