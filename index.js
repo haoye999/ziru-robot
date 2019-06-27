@@ -45,6 +45,7 @@ async function sendMail(msg) {
 function main() {
   const timer = setInterval(() => {
     getInfo(id).then(info => {
+      console.log(info, loadingImg);
       if (info !== loadingImg) {
         console.log(configuration.canBuy);
         sendMail('买了买了');
