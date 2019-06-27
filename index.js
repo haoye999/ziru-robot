@@ -58,7 +58,7 @@ function main() {
         console.log(configuration.cantBuy);
       }
     });
-  }, 1000);
+  }, 60000);
 }
 
 main();
