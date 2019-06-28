@@ -12,7 +12,7 @@ const configuration = {
 
 const id = '205172';
 const loadingImg =
-  'http://pic.ziroom.com/static/images/slist_1207/defaultPZZ/other-loading.jpg';
+  '-loading.jpg';
 
 function getInfo(id) {
   const url = `http://www.ziroom.com/z/vr/${id}.html`;
@@ -50,7 +50,7 @@ async function sendMail(msg) {
 function main() {
   const timer = setInterval(() => {
     getInfo(id).then(info => {
-      if (info !== loadingImg) {
+      if (!info.endsWith(loadingImg)) {
         console.log(configuration.canBuy);
         sendMail('买了买了');
         clearInterval(timer);
@@ -58,7 +58,7 @@ function main() {
         console.log(configuration.cantBuy);
       }
     });
-  }, 60000);
+  }, 1000);
 }
 
 main();
