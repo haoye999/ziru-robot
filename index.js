@@ -39,7 +39,7 @@ async function sendMail(msg) {
   });
 
   transporter.sendMail({
-    from: '"自如买啊买" <hanlianhao1234@163.com>',
+    from: `"自如买啊买" ${configUser.user}`,
     to: configUser.to,
     subject: '[！！！重要！！！]赶紧买',
     text: msg
