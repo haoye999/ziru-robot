@@ -45,14 +45,16 @@ async function sendMail(msg) {
 
 function main() {
   const timer = setInterval(() => {
-    getInfo(configUser.id).then(ing => {
-      if (!ing) {
-        console.log(configuration.canBuy);
-        sendMail('买了买了');
-        clearInterval(timer);
-      } else {
-        console.log(configuration.cantBuy, '   ', (new Date()).toLocaleString());
-      }
+    configUser.ids.forEach((id) => {
+      getInfo(id).then(ing => {
+        if (!ing) {
+          console.log(configuration.canBuy);
+          sendMail('买了买了');
+          clearInterval(timer);
+        } else {
+          console.log(configuration.cantBuy, '   ', (new Date()).toLocaleString());
+        }
+      });
     });
   }, 10000);
 }
