@@ -10,21 +10,18 @@ const configuration = {
   canBuy: '赶紧抢'
 };
 
-const id = '205172';
-const loadingImg = '-loading.jpg';
-
 function getInfo(id) {
-  const url = `http://www.ziroom.com/z/vr/${id}.html`;
+  const url = `http://www.ziroom.com/x/${id}.html`;
 
   return axios({
     method: 'GET',
     url,
-    headers: {
-      Cookie: configUser.Cookie || ''
-    }
+    // headers: {
+    //   Cookie: configUser.Cookie || ''
+    // }
   })
     .then(res => cheerio.load(res.data))
-    .then($ => $('.pirobox_t6').attr('href'));
+    .then($ => $('.Z_info_aside .Z_name .status').hasClass('iconicon_release'));
 }
 
 async function sendMail(msg) {
@@ -48,13 +45,13 @@ async function sendMail(msg) {
 
 function main() {
   const timer = setInterval(() => {
-    getInfo(configUser.id).then(info => {
-      if (!info.endsWith(loadingImg)) {
+    getInfo(configUser.id).then(ing => {
+      if (!ing) {
         console.log(configuration.canBuy);
         sendMail('买了买了');
         clearInterval(timer);
       } else {
-        console.log(configuration.cantBuy);
+        console.log(configuration.cantBuy, '   ', (new Date()).toLocaleString());
       }
     });
   }, 10000);
